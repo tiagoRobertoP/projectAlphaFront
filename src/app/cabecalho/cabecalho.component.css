@@ -1,0 +1,62 @@
+a:-webkit-any-link {
+  color:#ffffff!important;
+  cursor: pointer!important;
+  text-decoration: none;
+}
+
+
+ul{
+  list-style:none;
+  text-decoration: none;
+}
+
+li{
+  float:left;
+  padding: 20px;
+}
+
+a:hover{
+  color:#FFAD82!important;
+  text-decoration: none;
+  }
+
+  a{
+    text-decoration: none;
+    color:#FFAD82!important;
+  }
+
+  .menu-spacer {
+    flex: 1 1 auto;
+  }
+
+
+  .logo{
+    color: #FFAD82!important;
+  }
+
+  mat-toolbar {
+    background-color: #EC8947!important;
+  }
+
+  mat-icon{
+    color: #ffffff!important;
+  }
+
+  mat-icon:hover{
+    color: rgb(247, 127, 57)!important;
+    cursor: pointer;
+  }
+
+  a{
+    color: #FFAD82!important;
+  }
+
+  mat-toolbar {
+    background-color: #495770!important
+    ;
+  }
+
+  button{
+    background: transparent!important;
+    border: none!important;
+  }

@@ -1,0 +1,102 @@
+.icon_nav{
+  font-size: 50px;
+  color: white;
+}
+
+main{
+  margin-top: 1rem;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: -webkit-center;
+}
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+mat-sidenav-content{
+  --height:fit-content;
+}
+
+
+.sidenav {
+  background-color: #495770!important;
+  width: 200px;
+  position: fixed;
+  top: 64px;
+}
+
+.sidenav a {
+  color: rgb(255, 255, 255);
+}
+
+h4 {
+  color: rgb(255, 255, 255);
+}
+
+
+.content {
+  padding: 16px;
+  background-color: rgb(20, 20, 20);
+}
+
+.close{
+  left: 70%;
+}
+
+.user{
+  font-size: 12px;
+  width: 98%;
+  justify-content: center;
+  text-align: center;
+  color: rgb(253, 236, 213);
+  display: inline-grid;
+}
+
+.userName{
+font-size: 14px;
+color: rgb(255, 255, 255);
+margin-top: 3px;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+  top: -9px;
+  position: relative;
+}
+
+
+
+ul li {
+  list-style-type: none;
+  padding: 2px;
+}
+
+h4{
+  margin: 5px;
+  font-weight: 300!important;
+}
+
+
+
+.icon_nav:hover{
+  color: #FFAD82!important;
+  font-size: 60px;
+}
+
+
+
+mat-icon{
+  color: rgb(247, 127, 57);
+}
+
+
+
+ul {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 0;
+}

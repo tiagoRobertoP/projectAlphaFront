@@ -1,0 +1,34 @@
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav class="sidenav" mode="side" opened
+    fixedInViewport="false" fixedTopGap="64">
+      <mat-nav-list>
+        <ul  style="margin-top: 80px;">
+          <a href="#" routerLink="/projeto">
+            <i class="material-icons icon_nav">work</i>
+            <h4>Projetos</h4>
+          </a>
+        </ul>
+
+        <ul >
+          <a href="#" routerLink="/pessoa">
+            <i class="material-icons icon_nav">person</i>
+            <h4>Pessoas</h4>
+          </a>
+        </ul>
+
+        <ul  >
+          <a href="#" routerLink="/membros">
+            <i class="material-icons icon_nav">people</i>
+            <h4>Membros</h4>
+          </a>
+        </ul>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
