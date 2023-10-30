@@ -19,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { Sort, MatSortModule } from '@angular/material/sort';
-import { AddPessoaComponent } from './src/app/pessoa/add-pessoa/add-pessoa.component';
+import { AddPessoaComponent } from './pessoa/add-pessoa/add-pessoa.component';
+import { FormsModule } from '@angular/forms';
+import { DeletePessoaComponent } from './pessoa/delete-pessoa/delete-pessoa.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { AddPessoaComponent } from './src/app/pessoa/add-pessoa/add-pessoa.compo
     NavComponent,
     LayoutComponent,
     CabecalhoComponent,
-    AddPessoaComponent
+    AddPessoaComponent,
+    DeletePessoaComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { AddPessoaComponent } from './src/app/pessoa/add-pessoa/add-pessoa.compo
     MatPaginatorModule,
     MatDialogModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

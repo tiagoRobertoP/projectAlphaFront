@@ -17,6 +17,8 @@ import { PessoaService } from './pessoa.service';
 import { Pessoa } from './pessoa.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { AddPessoaComponent } from './add-pessoa/add-pessoa.component';
+import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
 
 
 @Component({
@@ -58,20 +60,20 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
 
 
 
-  // openAddDialog() {
-  //   const dialogRef = this.dialogService.open(AddDialogComponent, {
-  //     data: {issue: {} }
-  //   });
+  openAddDialog() {
+    const dialogRef = this.dialogService.open(AddPessoaComponent, {
+      data: {pessoa: {} }
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       // After dialog is closed we're doing frontend updates
-  //       // For add we're just pushing a new row inside DataService
-  //       this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
-  //       this.refreshTable();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // After dialog is closed we're doing frontend updates
+        // For add we're just pushing a new row inside DataService
+        this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
+        this.refreshTable();
+      }
+    });
+  }
 
   // startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
   //   this.id = id;
@@ -94,26 +96,27 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
   //   });
   // }
 
-  // deleteItem(i: number, id: number, title: string, state: string, url: string) {
-  //   this.index = i;
-  //   this.id = id;
-  //   const dialogRef = this.dialogService.open(DeleteDialogComponent, {
-  //     data: {id: id, title: title, state: state, url: url}
-  //   });
+  deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
+    this.index = i;
+    this.id = idPessoa;
+    const dialogRef = this.dialogService.open(DeletePessoaComponent, {
+      data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento}
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.id === this.id);
-  //       // for delete we use splice in order to remove single object from DataService
-  //       this.pessoaService.dataChange.value.splice(foundIndex, 1);
-  //       this.refreshTable();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
+        // for delete we use splice in order to remove single object from DataService
+        this.pessoaService.dataChange.value.splice(foundIndex, 1);
+        this.refreshTable();
+      }
+    });
+  }
 
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
+    this.loadData({ page: "0", size: "5" });
   }
 
   public loadData(request): void {
