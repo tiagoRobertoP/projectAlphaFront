@@ -22,6 +22,9 @@ import { Sort, MatSortModule } from '@angular/material/sort';
 import { AddPessoaComponent } from './pessoa/add-pessoa/add-pessoa.component';
 import { FormsModule } from '@angular/forms';
 import { DeletePessoaComponent } from './pessoa/delete-pessoa/delete-pessoa.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { DeletePessoaComponent } from './pessoa/delete-pessoa/delete-pessoa.comp
     MatDialogModule,
     MatInputModule,
     MatSortModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,19 +29,21 @@ import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
 export class PessoaComponent implements OnInit, AfterViewInit  {
 
 
-  displayedColumns = ['idPessoa', 'nome', 'cpf', 'datanascimento', 'funcionario', 'actions'];
+  displayedColumns = ['idPessoa', 'nome', 'cpf', 'datanascimento', 'Efuncionario', 'actions'];
   pessoaService2: PessoaService | null;
   dataSource = new MatTableDataSource();
   index: number;
   id: number;
   totalElements: number = 0;
   public pessoas:Array<Pessoa> = [];
+  public pessoasList:Array<Pessoa> = [];
 
   constructor(public httpClient: HttpClient,
               public dialogService: MatDialog,
               public dataService: PessoaService,
               public router: Router,
-              public pessoaService: PessoaService) {}
+              public pessoaService: PessoaService,
+              private changeDetectorRefs: ChangeDetectorRef) {}
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('filter',  {static: true}) filter: ElementRef;
@@ -104,27 +106,39 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
         const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
-        // for delete we use splice in order to remove single object from DataService
+
         this.pessoaService.dataChange.value.splice(foundIndex, 1);
+        this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
-      }
     });
   }
 
 
   private refreshTable() {
-    this.paginator._changePageSize(this.paginator.pageSize);
+    // this.paginator._changePageSize(this.paginator.pageSize);
     this.loadData({ page: "0", size: "5" });
+
+
   }
 
   public loadData(request): void {
+    this.pessoasList = [];
     this.pessoaService.getAllPessoas(request).subscribe(resultado =>
       {
         this.pessoas = resultado['content'];
+        for (let pessoa of this.pessoas){
+          if (pessoa.funcionario === true){
+            pessoa.Efuncionario = 'Sim';
+            this.pessoasList.push(pessoa);
+          }else {
+            pessoa.Efuncionario = 'Não';
+            this.pessoasList.push(pessoa);
+          }
+        }
+
         this.totalElements = resultado['totalElements']
-        this.dataSource = resultado['content']
+        this.dataSource.data = this.pessoasList
       });
   }
 

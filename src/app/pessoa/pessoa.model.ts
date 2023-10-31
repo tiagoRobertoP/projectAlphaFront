@@ -3,6 +3,6 @@ export class Pessoa {
   nome: string;
   cpf: number;
   datanascimento: Date;
-  Efuncionario: Boolean;
-  funcionario: string;
+  Efuncionario: string;
+  funcionario: Boolean;
 }

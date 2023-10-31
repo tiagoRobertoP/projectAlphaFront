@@ -1,7 +1,7 @@
 <div class="container">
   <h3 mat-dialog-title>Adicionar Pessoa</h3>
 
-  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
 
     <!--Textarea for demo purposes-->
     <div class="form">
@@ -11,11 +11,11 @@
           #input
           class="form-control"
           placeholder="Nome"
-          [(ngModel)]="data.nome"
+          formControlName="nome"
           name="nome"
           required
         ></textarea>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
       </mat-form-field>
     </div>
 
@@ -27,18 +27,36 @@
           #inputstate
           class="form-control"
           placeholder="Cpf"
-          [(ngModel)]="data.cpf"
+          formControlName="cpf"
           name="state"
           required
         />
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput  placeholder="Data Nascimento" [(ngModel)]="data.datanascimento" name="datanascimento" />
+        <input matInput  placeholder="Data Nascimento" formControlName="datanascimento" name="datanascimento" />
       </mat-form-field>
+    </div>
+
+    <!-- <div class="form">
+      <mat-form-field color="accent" formControlName="funcionario">
+        <mat-checkbox matInput
+                  [(ngModel)]="data.funcionario"
+                  name="funcionario">{{data.funcionario}}
+                  (change)="setAll($event.checked)"
+        </mat-checkbox>
+      </mat-form-field>
+    </div> -->
+
+    <div class="form">
+      <label id="funcionario">Funcionário</label><br>
+        <mat-radio-group aria-labelledby="funcionario" name="funcionario"  formControlName="funcionario">
+          <mat-radio-button matInput value="true" >Sim</mat-radio-button>
+          <mat-radio-button matInput value="false" >Não</mat-radio-button>
+        </mat-radio-group>
     </div>
 
 

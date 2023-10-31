@@ -1,3 +1,9 @@
+<mat-toolbar color="primary">
+  <span>PESSOAS</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+
 <div class="container mat-elevation-z8">
 
 
@@ -27,9 +33,9 @@
       <mat-cell *matCellDef="let row"> {{row.datanascimento}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="funcionario">
+    <ng-container matColumnDef="Efuncionario">
       <mat-header-cell *matHeaderCellDef >Funcionário</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.funcionario}}</mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.Efuncionario}}</mat-cell>
     </ng-container>
 
 
@@ -42,11 +48,11 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.funcionario)">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.Efuncionario)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button type="button" mat-icon-button color="accent" (click)="deleteItem(i, row.idPessoa, row.nome, row.cpf, row.funcionario)">
+        <button type="button" mat-icon-button color="accent" (click)="deleteItem(i, row.idPessoa, row.nome, row.cpf, row.Efuncionario)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
