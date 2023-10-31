@@ -38,6 +38,11 @@
       <mat-cell *matCellDef="let row"> {{row.Efuncionario}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="funcionario" style="display: none;" >
+      <mat-header-cell *matHeaderCellDef  style="display: none;" >Funcionário</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="display: none;" > {{row.funcionario}}</mat-cell>
+    </ng-container>
+
 
     <!-- actions -->
     <ng-container matColumnDef="actions">
@@ -48,7 +53,7 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.Efuncionario)">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.datanascimento, row.funcionario)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 

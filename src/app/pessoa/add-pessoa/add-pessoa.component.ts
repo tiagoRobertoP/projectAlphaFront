@@ -40,7 +40,7 @@ export class AddPessoaComponent implements OnInit {
   }
 
   submit() {
-  // emppty stuff
+
   }
 
   onNoClick(): void {
@@ -51,5 +51,4 @@ export class AddPessoaComponent implements OnInit {
   this.pessoaService.addPessoa(this.addFormGroup.value).subscribe(resultado => this.data = resultado);
   }
 
-datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
 }

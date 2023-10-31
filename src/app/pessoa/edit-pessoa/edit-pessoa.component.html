@@ -1,0 +1,92 @@
+
+<div class="container">
+  <h3 mat-dialog-title>Editar Pessoa</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea
+          matInput
+          #input
+          class="form-control"
+          placeholder="Id"
+          formControlName="idPessoa"
+          name="idPessoa"
+          required
+        ></textarea>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea
+          matInput
+          #input
+          class="form-control"
+          placeholder="Nome"
+          formControlName="nome"
+          name="nome"
+          required
+        ></textarea>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input
+          matInput
+          #inputstate
+          class="form-control"
+          placeholder="Cpf"
+          formControlName="cpf"
+          name="state"
+          required
+        />
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Data Nascimento" formControlName="datanascimento" name="datanascimento" />
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="form">
+      <mat-form-field color="accent" formControlName="funcionario">
+        <mat-checkbox matInput
+                  [(ngModel)]="data.funcionario"
+                  name="funcionario">{{data.funcionario}}
+                  (change)="setAll($event.checked)"
+        </mat-checkbox>
+      </mat-form-field>
+    </div> -->
+
+    <div class="form">
+      <label id="funcionario">Funcionário</label><br>
+        <mat-radio-group aria-labelledby="funcionario" name="funcionario"  formControlName="funcionario">
+          <mat-radio-button matInput value="true" >Sim</mat-radio-button>
+          <mat-radio-button matInput value="false" >Não</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        type="button"
+        [disabled]="!formControl.valid"
+        [mat-dialog-close]="1"
+        (click)="stopEdit()"
+      >
+        Save
+      </button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

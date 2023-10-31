@@ -13,3 +13,15 @@ main {
     margin-left: 46px!important;
 }
 
+@media screen and (max-width: 600px) {
+  .sidenav {
+    top: 56px!important;
+}
+}
+
+
+@media screen and (max-width: 1150px) {
+  main {
+    width: 89%!important;
+}
+}

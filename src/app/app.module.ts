@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { DeletePessoaComponent } from './pessoa/delete-pessoa/delete-pessoa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { EditPessoaComponent } from './pessoa/edit-pessoa/edit-pessoa.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatRadioModule } from '@angular/material/radio';
     LayoutComponent,
     CabecalhoComponent,
     AddPessoaComponent,
-    DeletePessoaComponent
+    DeletePessoaComponent,
+    EditPessoaComponent
   ],
   imports: [
     BrowserModule,

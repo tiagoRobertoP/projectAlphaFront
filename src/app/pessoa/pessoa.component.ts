@@ -19,6 +19,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AddPessoaComponent } from './add-pessoa/add-pessoa.component';
 import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
+import { EditPessoaComponent } from './edit-pessoa/edit-pessoa.component';
 
 
 @Component({
@@ -29,7 +30,7 @@ import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
 export class PessoaComponent implements OnInit, AfterViewInit  {
 
 
-  displayedColumns = ['idPessoa', 'nome', 'cpf', 'datanascimento', 'Efuncionario', 'actions'];
+  displayedColumns = ['idPessoa', 'nome', 'cpf', 'datanascimento', 'Efuncionario','funcionario', 'actions'];
   pessoaService2: PessoaService | null;
   dataSource = new MatTableDataSource();
   index: number;
@@ -56,11 +57,7 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
   //   this.loadData({ page: "0", size: "5" });
   // }
 
-  ngAfterViewInit() {
-
-  }
-
-
+  ngAfterViewInit() {}
 
   openAddDialog() {
     const dialogRef = this.dialogService.open(AddPessoaComponent, {
@@ -77,26 +74,26 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  // startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
-  //   this.id = id;
-  //   // index row is used just for debugging proposes and can be removed
-  //   this.index = i;
-  //   console.log(this.index);
-  //   const dialogRef = this.dialogService.open(EditDialogComponent, {
-  //     data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
-  //   });
+  startEdit(i: number, idPessoa: number,nome: string, cpf: string, datanascimento: string, funcionario: string) {
+    this.id = idPessoa;
+    // index row is used just for debugging proposes and can be removed
+    this.index = i;
+    console.log(this.index);
+    const dialogRef = this.dialogService.open(EditPessoaComponent, {
+      data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento, funcionario: funcionario}
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       // When using an edit things are little different, firstly we find record inside DataService by id
-  //       const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.id === this.id);
-  //       // Then you update that record using data from dialogData (values you enetered)
-  //       this.pessoaService.dataChange.value[foundIndex] = this.dataService.getDialogData();
-  //       // And lastly refresh table
-  //       this.refreshTable();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      // if (result === 1) {
+
+        // const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
+
+        // this.pessoaService.dataChange.value[foundIndex] = this.dataService.getDialogData();
+        // And lastly refresh table
+        this.refreshTable();
+      // }
+    });
+  }
 
   deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
     this.index = i;

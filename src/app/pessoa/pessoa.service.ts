@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Pessoa } from './pessoa.model';
 import { Router } from '@angular/router';
 
@@ -54,6 +54,11 @@ export class PessoaService {
   addPessoa(pessoa: Pessoa): Observable<any> {
   return this.httpClient.post(this.API_URL + '/pessoa', pessoa);
   }
+
+  updatePessoa(pessoa: Pessoa): Observable<any> {
+    return this.httpClient.put(this.API_URL + '/pessoa/alterar/' + pessoa.idPessoa , pessoa);
+  }
+
 }
 
 
