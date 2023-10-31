@@ -1,0 +1,94 @@
+<mat-toolbar color="primary">
+  <span>PROJETOS</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+
+<div class="container mat-elevation-z8">
+
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell" >
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id" style="display: none;">
+      <mat-header-cell *matHeaderCellDef  style="display: none; ">Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"  style="display: none; ">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nome" >
+      <mat-header-cell *matHeaderCellDef style="margin-left: 15px; ">Nome</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="margin-left: 15px; "> {{row.nome}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+      <mat-header-cell *matHeaderCellDef >Descricao</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.descricao}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef >Status</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="risco">
+      <mat-header-cell *matHeaderCellDef >Risco</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.risco}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orcamento">
+      <mat-header-cell *matHeaderCellDef>orcamento</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.orcamento}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dataInicio">
+      <mat-header-cell *matHeaderCellDef>Data Início</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dataInicio}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dataPrevisaoFim">
+      <mat-header-cell *matHeaderCellDef>Data Previsão Fim</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dataPrevisaoFim}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dataFim">
+      <mat-header-cell *matHeaderCellDef>Data Fim</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dataFim}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nomeGerente">
+      <mat-header-cell *matHeaderCellDef>Nome Gerente</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nomeGerente}}</mat-cell>
+    </ng-container>
+
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button type="button" mat-icon-button color="primary" (click)="openAddDialog()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+       <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.datanascimento, row.funcionario)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button type="button" mat-icon-button color="accent" (click)="deleteItem(i, row.idPessoa, row.nome, row.cpf, row.Efuncionario)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements" [pageIndex]="0" (page)="nextPage($event)"> </mat-paginator>
+</div>

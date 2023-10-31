@@ -52,7 +52,7 @@ export class PessoaService {
 
   // ADD, POST METHOD
   addPessoa(pessoa: Pessoa): Observable<any> {
-  return this.httpClient.post(this.API_URL + '/pessoa', pessoa);
+    return this.httpClient.post(this.API_URL + '/pessoa', pessoa);
   }
 
   updatePessoa(pessoa: Pessoa): Observable<any> {

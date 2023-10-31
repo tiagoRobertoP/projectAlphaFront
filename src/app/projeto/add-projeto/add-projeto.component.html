@@ -1,0 +1,98 @@
+<div class="container">
+  <h3 mat-dialog-title>Adicionar Pessoa</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea
+          matInput
+          #input
+          class="form-control"
+          placeholder="Nome"
+          formControlName="nome"
+          name="nome"
+          required
+        ></textarea>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input
+          matInput
+          #inputstate
+          class="form-control"
+          placeholder="Descricao"
+          formControlName="descricao"
+          name="state"
+          required
+        />
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Status" formControlName="status" name="status" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Risco" formControlName="risco" name="risco" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Orcamento" formControlName="orcamento" name="orcamento" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Data Início" formControlName="dataInicio" name="dataInicio" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Data Previsão Fim" formControlName="dataPrevisaoFim" name="dataPrevisaoFim" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Data Fim" formControlName="dataFim" name="dataFim" required/>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <!-- <mat-label>Gerente</mat-label> -->
+        <mat-select  placeholder="Gerente" formControlName="gerente" (selectionChange)="changePessoa($event.value)">
+          <mat-option  *ngFor="let ger of gerente" [value]="ger.idPessoa" >
+            {{ger.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        type="button"
+        [disabled]="!formControl.valid"
+        [mat-dialog-close]="1"
+        (click)="confirmAdd()"
+      >
+        Save
+      </button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

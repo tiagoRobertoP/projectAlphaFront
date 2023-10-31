@@ -1,0 +1,54 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Projeto } from './projeto.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Pessoa } from '../pessoa/pessoa.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProjetoService {
+  private readonly API_URL = 'http://localhost:8080/api';
+
+  dataChange: BehaviorSubject<Projeto[]> = new BehaviorSubject<Projeto[]>([]);
+  dialogData: any;
+
+  constructor(private httpClient: HttpClient) {}
+
+  get data(): Projeto[] {
+    return this.dataChange.value;
+  }
+
+  getDialogData() {
+    return this.dialogData;
+  }
+
+  /** CRUD METHODS */
+  getAllProjetos(request): Observable<Projeto[]> {
+    let params = new HttpParams();
+    params = params.append('page', request.page);
+    params = params.append('size', request.size);
+    return this.httpClient.get<Projeto[]>(this.API_URL + '/projeto', {params: params} );
+  }
+
+
+  // deletePessoa(id: number): Observable<Pessoa[]> {
+  //   return this.httpClient.delete<Pessoa[]>(this.API_URL + '/pessoa/' +  id);
+  // }
+
+  addProjeto(projeto: Projeto): Observable<any> {
+    return this.httpClient.post(this.API_URL + '/projeto', projeto);
+  }
+
+  // updatePessoa(pessoa: Pessoa): Observable<any> {
+  //   return this.httpClient.put(this.API_URL + '/pessoa/alterar/' + pessoa.idPessoa , pessoa);
+  // }
+
+  getAllPessoas(request): Observable<Pessoa[]> {
+    let params = new HttpParams();
+    params = params.append('page', request.page);
+    params = params.append('size', request.size);
+    return this.httpClient.get<Pessoa[]>(this.API_URL + '/pessoa', {params: params} );
+  }
+
+}

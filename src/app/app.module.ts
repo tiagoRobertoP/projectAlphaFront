@@ -25,6 +25,9 @@ import { DeletePessoaComponent } from './pessoa/delete-pessoa/delete-pessoa.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { EditPessoaComponent } from './pessoa/edit-pessoa/edit-pessoa.component';
+import { ProjetoComponent } from './projeto/projeto.component';
+import { AddProjetoComponent } from './projeto/add-projeto/add-projeto.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { EditPessoaComponent } from './pessoa/edit-pessoa/edit-pessoa.component'
     CabecalhoComponent,
     AddPessoaComponent,
     DeletePessoaComponent,
-    EditPessoaComponent
+    EditPessoaComponent,
+    ProjetoComponent,
+    AddProjetoComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,8 @@ import { EditPessoaComponent } from './pessoa/edit-pessoa/edit-pessoa.component'
     MatSortModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule
 
   ],
   providers: [],
