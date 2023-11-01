@@ -13,7 +13,22 @@ import { Pessoa } from 'src/app/pessoa/pessoa.model';
 export class AddProjetoComponent implements OnInit {
 
   public addFormGroup: FormGroup;
-  gerente: Array<Pessoa> =[]
+  gerente: Array<Pessoa> =[];
+  Risco: Array<{option:string}> = [
+    {option:"BAIXO_RISCO"},
+    {option:"MEDIO_RISCO"},
+    {option:"ALTO_RISCO"}
+  ];
+  Status: Array<{option:string}> = [
+    {option:"EM_ANALISE"},
+    {option:"ANALISE_REALIZADA"},
+    {option:"AGENDADANALISE_APROVADA"},
+    {option:"INICIADO"},
+    {option:"PLANEJADO"},
+    {option:"EM_ANDAMENTO"},
+    {option:"ENCERRADO"},
+    {option:"CANCELADO"}
+  ];
 
 
   constructor(public dialogRef: MatDialogRef<AddProjetoComponent>,
@@ -39,6 +54,7 @@ export class AddProjetoComponent implements OnInit {
     this.gerente = this.data.pessoaList;
     console.log('data ' + this.data);
     console.log('gerente ' + this.gerente)
+
   }
 
   formControl = new FormControl('', [
@@ -68,4 +84,8 @@ export class AddProjetoComponent implements OnInit {
     console.log(value);
 }
 
+
+
 }
+
+// export enum Risco { BAIXO_RISCO, MEDIO_RISCO, ALTO_RISCO }

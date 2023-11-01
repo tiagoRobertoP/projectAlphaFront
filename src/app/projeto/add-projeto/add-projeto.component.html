@@ -37,13 +37,23 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput  placeholder="Status" formControlName="status" name="status" required/>
+        <!-- <mat-label>Gerente</mat-label> -->
+        <mat-select  placeholder="Status" formControlName="status" >
+          <mat-option  *ngFor="let status of Status" [value]="status.option" >
+            {{status.option}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput  placeholder="Risco" formControlName="risco" name="risco" required/>
+        <!-- <mat-label>Gerente</mat-label> -->
+        <mat-select  placeholder="Risco" formControlName="risco" >
+          <mat-option  *ngFor="let risco of Risco" [value]="risco.option" >
+            {{risco.option}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
@@ -81,6 +91,8 @@
         </mat-select>
       </mat-form-field>
     </div>
+
+
 
     <div mat-dialog-actions>
       <button
