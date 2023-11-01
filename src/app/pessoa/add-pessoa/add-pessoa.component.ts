@@ -48,7 +48,7 @@ export class AddPessoaComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-  this.pessoaService.addPessoa(this.addFormGroup.value).subscribe(resultado => this.data = resultado);
+    this.pessoaService.addPessoa(this.addFormGroup.value).subscribe(resultado => this.data = resultado);
   }
 
 }

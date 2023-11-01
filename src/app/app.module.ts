@@ -28,6 +28,9 @@ import { EditPessoaComponent } from './pessoa/edit-pessoa/edit-pessoa.component'
 import { ProjetoComponent } from './projeto/projeto.component';
 import { AddProjetoComponent } from './projeto/add-projeto/add-projeto.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 @NgModule({
@@ -62,7 +65,9 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
   ],
   providers: [],

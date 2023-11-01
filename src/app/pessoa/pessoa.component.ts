@@ -81,18 +81,22 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     console.log(this.index);
     const dialogRef = this.dialogService.open(EditPessoaComponent, {
       data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento, funcionario: funcionario}
+    })
+    .afterClosed()
+    .subscribe((shouldReload: boolean) => {
+        if (shouldReload) window.location.reload()
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    // dialogRef.afterClosed().subscribe(result => {
       // if (result === 1) {
 
         // const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
 
         // this.pessoaService.dataChange.value[foundIndex] = this.dataService.getDialogData();
         // And lastly refresh table
-        this.refreshTable();
+        // this.refreshTable();
       // }
-    });
+    // });
   }
 
   deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
@@ -100,15 +104,17 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     this.id = idPessoa;
     const dialogRef = this.dialogService.open(DeletePessoaComponent, {
       data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento}
+    })
+    .afterClosed()
+    .subscribe((shouldReload: boolean) => {
+        if (shouldReload) window.location.reload()
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-        const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
 
-        this.pessoaService.dataChange.value.splice(foundIndex, 1);
-        this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
-        this.refreshTable();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
+    //   this.refreshTable();
+    // });
   }
 
 
