@@ -1,1 +1,68 @@
-<p>membros works!</p>
+
+<form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
+  <div class="form">
+    <mat-form-field color="accent">
+      <mat-label>Projeto</mat-label>
+      <mat-select  placeholder="Projeto" formControlName="projeto" (selectionChange)="changePessoa($event.value)" [(value)]="selected">
+        <mat-option  *ngFor="let proj of projetoList" [value]="proj.id" >
+          {{proj.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
+
+<mat-toolbar color="primary">
+  <span>MEMBROS</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<div class="container mat-elevation-z8">
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell" >
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="idPessoa">
+      <mat-header-cell *matHeaderCellDef >Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.idPessoa}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nome}}</mat-cell>
+    </ng-container>
+
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <!-- <button type="button" mat-icon-button color="primary" (click)="openAddDialog()"> -->
+          <!-- <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> -->
+        <!-- </button> -->
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent"  *ngIf="!row.EhMembro" (click)="vincular(i, row.idPessoa)">
+          <!-- <mat-icon aria-label="Edit">edit</mat-icon> -->
+          vincular
+        </button>
+
+        <button type="button" mat-icon-button color="accent" *ngIf="row.EhMembro" (click)="desvincular(i, row.idPessoa)">
+          <!-- <mat-icon aria-label="Delete">delete</mat-icon> -->
+          desvincular
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements" [pageIndex]="0" > </mat-paginator>
+</div>

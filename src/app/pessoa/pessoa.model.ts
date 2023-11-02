@@ -5,4 +5,6 @@ export class Pessoa {
   datanascimento: Date;
   Efuncionario: string;
   funcionario: Boolean;
+
+  EhMembro: Boolean;
 }
