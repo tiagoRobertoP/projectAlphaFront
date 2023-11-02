@@ -37,7 +37,7 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input
+        <textarea
           matInput
           #inputstate
           class="form-control"
@@ -45,7 +45,7 @@
           formControlName="descricao"
           name="descricao"
           required
-        />
+        ></textarea>
         <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
       </mat-form-field>
     </div>

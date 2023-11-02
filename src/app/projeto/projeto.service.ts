@@ -32,9 +32,9 @@ export class ProjetoService {
   }
 
 
-  // deletePessoa(id: number): Observable<Pessoa[]> {
-  //   return this.httpClient.delete<Pessoa[]>(this.API_URL + '/pessoa/' +  id);
-  // }
+  deleteProjeto(id: number): Observable<Projeto[]> {
+    return this.httpClient.delete<Projeto[]>(this.API_URL + '/projeto/' +  id);
+  }
 
   addProjeto(projeto: Projeto): Observable<any> {
     return this.httpClient.post(this.API_URL + '/projeto', projeto);

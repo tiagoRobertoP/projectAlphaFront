@@ -7,12 +7,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import {BehaviorSubject, fromEvent, merge, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DataSource} from '@angular/cdk/collections';
-
-
-// import {AddDialogComponent} from './dialogs/add/add.dialog.component';
-// import {EditDialogComponent} from './dialogs/edit/edit.dialog.component';
-// import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
-
 import { PessoaService } from './pessoa.service';
 import { Pessoa } from './pessoa.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -53,10 +47,6 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     this.loadData({ page: "0", size: "5" });
   }
 
-  // reload() {
-  //   this.loadData({ page: "0", size: "5" });
-  // }
-
   ngAfterViewInit() {}
 
   openAddDialog() {
@@ -66,8 +56,6 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
         this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
@@ -76,7 +64,6 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
 
   startEdit(i: number, idPessoa: number,nome: string, cpf: string, datanascimento: string, funcionario: string) {
     this.id = idPessoa;
-    // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialogService.open(EditPessoaComponent, {
@@ -86,17 +73,6 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     .subscribe((shouldReload: boolean) => {
         if (shouldReload) window.location.reload()
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-      // if (result === 1) {
-
-        // const foundIndex = this.pessoaService.dataChange.value.findIndex(x => x.idPessoa === this.id);
-
-        // this.pessoaService.dataChange.value[foundIndex] = this.dataService.getDialogData();
-        // And lastly refresh table
-        // this.refreshTable();
-      // }
-    // });
   }
 
   deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
@@ -109,20 +85,11 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     .subscribe((shouldReload: boolean) => {
         if (shouldReload) window.location.reload()
     });
-
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.pessoaService.dataChange.value.push(this.dataService.getDialogData());
-    //   this.refreshTable();
-    // });
   }
 
 
   private refreshTable() {
-    // this.paginator._changePageSize(this.paginator.pageSize);
     this.loadData({ page: "0", size: "5" });
-
-
   }
 
   public loadData(request): void {

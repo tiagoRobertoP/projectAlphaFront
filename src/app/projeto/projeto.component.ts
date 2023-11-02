@@ -9,6 +9,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AddProjetoComponent } from './add-projeto/add-projeto.component';
 import { Pessoa } from '../pessoa/pessoa.model';
 import { EditProjetoComponent } from './edit-projeto/edit-projeto.component';
+import { DeleteProjetoComponent } from './delete-projeto/delete-projeto.component';
 
 @Component({
   selector: 'app-projeto',
@@ -41,10 +42,6 @@ export class ProjetoComponent implements OnInit {
     this.loadData({ page: "0", size: "5" });
   }
 
-  // reload() {
-  //   this.loadData({ page: "0", size: "5" });
-  // }
-
   ngAfterViewInit() {}
 
   openAddDialog() {
@@ -65,10 +62,7 @@ export class ProjetoComponent implements OnInit {
             this.refreshTable();
           }
         });
-
     });
-
-
   }
 
   startEdit(i: number, id: number,nome: string, descricao: string, status: string,
@@ -80,42 +74,26 @@ export class ProjetoComponent implements OnInit {
     const dialogRef = this.dialogService.open(EditProjetoComponent, {
       data: {id: id, nome: nome, descricao: descricao, status: status, risco: risco, orcamento: orcamento,
         dataInicio: dataInicio, dataPrevisaoFim: dataPrevisaoFim, dataFim: dataFim, gerente: gerente}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // if (result === 1) {
-
-        // const foundIndex = this.projetoService.dataChange.value.findIndex(x => x.idPessoa === this.id);
-
-        // this.projetoService.dataChange.value[foundIndex] = this.dataService.getDialogData();
-        // And lastly refresh table
-        this.refreshTable();
-      // }
+    })
+    .afterClosed()
+    .subscribe((shouldReload: boolean) => {
+        if (shouldReload) window.location.reload()
     });
   }
 
-  // deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
-  //   this.index = i;
-  //   this.id = idPessoa;
-  //   const dialogRef = this.dialogService.open(DeletePessoaComponent, {
-  //     data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //       const foundIndex = this.projetoService.dataChange.value.findIndex(x => x.idPessoa === this.id);
-
-  //       this.projetoService.dataChange.value.splice(foundIndex, 1);
-  //       this.projetoService.dataChange.value.push(this.dataService.getDialogData());
-  //       this.refreshTable();
-  //   });
-  // }
-
+  deleteItem(i: number,id: number, nome: string,) {
+    this.index = i;
+    this.id = id;
+    const dialogRef = this.dialogService.open(DeleteProjetoComponent, {
+      data: {id: id, nome: nome}
+    }).afterClosed()
+    .subscribe((shouldReload: boolean) => {
+        if (shouldReload) window.location.reload();
+    });
+  }
 
   private refreshTable() {
-    // this.paginator._changePageSize(this.paginator.pageSize);
     this.loadData({ page: "0", size: "5" });
-
-
   }
 
   public loadData(request): void {
