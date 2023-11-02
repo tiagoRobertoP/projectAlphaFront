@@ -32,6 +32,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { EditProjetoComponent } from './projeto/edit-projeto/edit-projeto.component';
 import { DeleteProjetoComponent } from './projeto/delete-projeto/delete-projeto.component';
+import { MembrosComponent } from './membros/membros.component';
 
 
 
@@ -48,7 +49,8 @@ import { DeleteProjetoComponent } from './projeto/delete-projeto/delete-projeto.
     ProjetoComponent,
     AddProjetoComponent,
     EditProjetoComponent,
-    DeleteProjetoComponent
+    DeleteProjetoComponent,
+    MembrosComponent
   ],
   imports: [
     BrowserModule,
