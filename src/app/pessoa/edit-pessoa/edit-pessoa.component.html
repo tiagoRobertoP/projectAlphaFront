@@ -51,9 +51,19 @@
       </mat-form-field>
     </div>
 
-    <div class="form">
+    <!-- <div class="form">
       <mat-form-field color="accent">
         <input matInput  placeholder="Data Nascimento" formControlName="datanascimento" name="datanascimento" />
+      </mat-form-field>
+    </div> -->
+
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Data Nascimento</mat-label>
+        <input matInput [matDatepicker]="pickerdatanascimento" formControlName="datanascimento" name="datanascimento" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerdatanascimento"></mat-datepicker-toggle>
+        <mat-datepicker #pickerdatanascimento></mat-datepicker>
       </mat-form-field>
     </div>
 
