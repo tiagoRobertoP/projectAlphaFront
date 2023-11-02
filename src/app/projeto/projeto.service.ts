@@ -40,9 +40,9 @@ export class ProjetoService {
     return this.httpClient.post(this.API_URL + '/projeto', projeto);
   }
 
-  // updatePessoa(pessoa: Pessoa): Observable<any> {
-  //   return this.httpClient.put(this.API_URL + '/pessoa/alterar/' + pessoa.idPessoa , pessoa);
-  // }
+  updateProjeto(projeto: Projeto): Observable<any> {
+    return this.httpClient.put(this.API_URL + '/projeto/alterar/' + projeto.id , projeto);
+  }
 
   getAllPessoas(request): Observable<Pessoa[]> {
     let params = new HttpParams();
@@ -50,5 +50,7 @@ export class ProjetoService {
     params = params.append('size', request.size);
     return this.httpClient.get<Pessoa[]>(this.API_URL + '/pessoa', {params: params} );
   }
+
+
 
 }

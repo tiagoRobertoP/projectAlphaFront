@@ -1,0 +1,156 @@
+<div class="container">
+  <h3 mat-dialog-title>Editar Projeto</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea
+          matInput
+          #input
+          class="form-control"
+          placeholder="Id"
+          formControlName="id"
+          name="id"
+          required
+        ></textarea>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea
+          matInput
+          #input
+          class="form-control"
+          placeholder="Nome"
+          formControlName="nome"
+          name="nome"
+          required
+        ></textarea>
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input
+          matInput
+          #inputstate
+          class="form-control"
+          placeholder="Descricao"
+          formControlName="descricao"
+          name="descricao"
+          required
+        />
+        <mat-error *ngIf="formControl.invalid">campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <!-- <mat-label>Gerente</mat-label> -->
+        <mat-select  placeholder="Status" formControlName="status" >
+          <mat-option  *ngFor="let status of Status" [value]="status.option" >
+            {{status.option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <!-- <mat-label>Gerente</mat-label> -->
+        <mat-select  placeholder="Risco" formControlName="risco" >
+          <mat-option  *ngFor="let risco of Risco" [value]="risco.option" >
+            {{risco.option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput  placeholder="Orcamento" formControlName="orcamento" name="orcamento" required/>
+      </mat-form-field>
+    </div>
+
+          <!-- <div class="form">
+            <mat-form-field color="accent">
+              <input matInput  placeholder="Data Início" formControlName="dataInicio" name="dataInicio" required/>
+            </mat-form-field>
+          </div> -->
+
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Data Início</mat-label>
+        <input matInput [matDatepicker]="pickerdataInicio" formControlName="dataInicio" name="dataInicio" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerdataInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerdataInicio></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+          <!-- <div class="form">
+            <mat-form-field color="accent">
+              <input matInput  placeholder="Data Previsão Fim" formControlName="dataPrevisaoFim" name="dataPrevisaoFim" required/>
+            </mat-form-field>
+          </div> -->
+
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Data Previsão Fim</mat-label>
+        <input matInput [matDatepicker]="pickerdataPrevisaoFim" formControlName="dataPrevisaoFim" name="dataPrevisaoFim" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerdataPrevisaoFim"></mat-datepicker-toggle>
+        <mat-datepicker #pickerdataPrevisaoFim></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+          <!-- <div class="form">
+            <mat-form-field color="accent">
+              <input matInput  placeholder="Data Fim" formControlName="dataFim" name="dataFim" required/>
+            </mat-form-field>
+          </div> -->
+
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Data Fim</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataFim" name="dataFim" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+         <mat-label>Gerente</mat-label>
+        <mat-select  placeholder="Gerente" formControlName="gerente" (selectionChange)="changePessoa($event.value)" [(value)]="selected">
+          <mat-option  *ngFor="let ger of pessoaList" [value]="ger.idPessoa" >
+            {{ger.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        type="button"
+        [disabled]="!formControl.valid"
+        [mat-dialog-close]="1"
+        (click)="stopEdit()"
+      >
+        Save
+      </button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AddProjetoComponent } from './add-projeto/add-projeto.component';
 import { Pessoa } from '../pessoa/pessoa.model';
+import { EditProjetoComponent } from './edit-projeto/edit-projeto.component';
 
 @Component({
   selector: 'app-projeto',
@@ -16,7 +17,7 @@ import { Pessoa } from '../pessoa/pessoa.model';
 })
 export class ProjetoComponent implements OnInit {
 
-  displayedColumns = ['id', 'nome', 'descricao', 'status', 'risco','orcamento', 'dataInicio', 'dataPrevisaoFim', 'dataFim', 'nomeGerente', 'actions'];
+  displayedColumns = ['id', 'nome', 'descricao', 'status', 'risco','orcamento', 'dataInicio', 'dataPrevisaoFim', 'dataFim', 'nomeGerente', 'gerente', 'actions'];
   projetoService2: ProjetoService | null;
   dataSource = new MatTableDataSource();
   index: number;
@@ -70,26 +71,28 @@ export class ProjetoComponent implements OnInit {
 
   }
 
-  // startEdit(i: number, idPessoa: number,nome: string, cpf: string, datanascimento: string, funcionario: string) {
-  //   this.id = idPessoa;
-  //   // index row is used just for debugging proposes and can be removed
-  //   this.index = i;
-  //   console.log(this.index);
-  //   const dialogRef = this.dialogService.open(EditPessoaComponent, {
-  //     data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento, funcionario: funcionario}
-  //   });
+  startEdit(i: number, id: number,nome: string, descricao: string, status: string,
+    risco: string, orcamento: number,dataInicio: Date, dataPrevisaoFim: Date, dataFim: Date, gerente: Pessoa) {
+    this.id = id;
+    // index row is used just for debugging proposes and can be removed
+    this.index = i;
+    console.log(this.index);
+    const dialogRef = this.dialogService.open(EditProjetoComponent, {
+      data: {id: id, nome: nome, descricao: descricao, status: status, risco: risco, orcamento: orcamento,
+        dataInicio: dataInicio, dataPrevisaoFim: dataPrevisaoFim, dataFim: dataFim, gerente: gerente}
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     // if (result === 1) {
+    dialogRef.afterClosed().subscribe(result => {
+      // if (result === 1) {
 
-  //       // const foundIndex = this.projetoService.dataChange.value.findIndex(x => x.idPessoa === this.id);
+        // const foundIndex = this.projetoService.dataChange.value.findIndex(x => x.idPessoa === this.id);
 
-  //       // this.projetoService.dataChange.value[foundIndex] = this.dataService.getDialogData();
-  //       // And lastly refresh table
-  //       this.refreshTable();
-  //     // }
-  //   });
-  // }
+        // this.projetoService.dataChange.value[foundIndex] = this.dataService.getDialogData();
+        // And lastly refresh table
+        this.refreshTable();
+      // }
+    });
+  }
 
   // deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
   //   this.index = i;

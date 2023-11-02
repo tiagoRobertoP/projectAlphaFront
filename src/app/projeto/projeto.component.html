@@ -14,8 +14,8 @@
 
     <!-- ID Column -->
     <ng-container matColumnDef="id" style="display: none;">
-      <mat-header-cell *matHeaderCellDef  style="display: none; ">Id</mat-header-cell>
-      <mat-cell *matCellDef="let row"  style="display: none; ">{{row.id}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef style="display: none;">Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="display: none;">{{row.id}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="nome" >
@@ -63,6 +63,11 @@
       <mat-cell *matCellDef="let row"> {{row.nomeGerente}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="gerente" style="display: none;">
+      <mat-header-cell *matHeaderCellDef style="display: none;">Gerente</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="display: none;"> {{row.gerente}}</mat-cell>
+    </ng-container>
+
 
     <!-- actions -->
     <ng-container matColumnDef="actions">
@@ -73,11 +78,11 @@
       </mat-header-cell>
 
        <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.idPessoa, row.nome, row.cpf, row.datanascimento, row.funcionario)">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.nome, row.descricao, row.status, row.risco, row.orcamento ,row.dataInicio, row.dataPrevisaoFim ,row.dataFim,  row.gerente)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button type="button" mat-icon-button color="accent" (click)="deleteItem(i, row.idPessoa, row.nome, row.cpf, row.Efuncionario)">
+        <button type="button" mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.nome)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
