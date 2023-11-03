@@ -21,9 +21,6 @@
 
   <mat-table #table [dataSource]="dataSource" matSort class="mat-cell" >
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
     <!-- ID Column -->
     <ng-container matColumnDef="idPessoa">
       <mat-header-cell *matHeaderCellDef >Id</mat-header-cell>
@@ -40,23 +37,17 @@
       <mat-cell *matCellDef="let row" style="display: none;"> {{row.idProjeto}}</mat-cell>
     </ng-container>
 
-
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <!-- <button type="button" mat-icon-button color="primary" (click)="openAddDialog()"> -->
-          <!-- <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> -->
-        <!-- </button> -->
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
         <button mat-icon-button color="accent"  *ngIf="!row.EhMembro" (click)="vincular(i, row.idPessoa, row.nome, row.idProjeto)">
-          <!-- <mat-icon aria-label="Edit">edit</mat-icon> -->
           vincular
         </button>
 
         <button type="button" mat-icon-button color="accent" *ngIf="row.EhMembro" (click)="desvincular(i, row.idPessoa, row.nome, row.idProjeto)">
-          <!-- <mat-icon aria-label="Delete">delete</mat-icon> -->
           desvincular
         </button>
       </mat-cell>
@@ -65,9 +56,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-
-
-
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements" [pageIndex]="0" > </mat-paginator>
 </div>

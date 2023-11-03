@@ -34,6 +34,7 @@ import { EditProjetoComponent } from './projeto/edit-projeto/edit-projeto.compon
 import { DeleteProjetoComponent } from './projeto/delete-projeto/delete-projeto.component';
 import { MembrosComponent } from './membros/membros.component';
 import { DesvincularMembroComponent } from './membros/desvincular-membro/desvincular-membro.component';
+import { VincularMembrosComponent } from './membros/vincular-membros/vincular-membros.component';
 
 
 
@@ -52,7 +53,8 @@ import { DesvincularMembroComponent } from './membros/desvincular-membro/desvinc
     EditProjetoComponent,
     DeleteProjetoComponent,
     MembrosComponent,
-    DesvincularMembroComponent
+    DesvincularMembroComponent,
+    VincularMembrosComponent
   ],
   imports: [
     BrowserModule,

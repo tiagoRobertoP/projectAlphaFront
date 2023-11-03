@@ -27,6 +27,7 @@ export class ProjetoComponent implements OnInit {
   public projetos:Array<Projeto> = [];
   public projetosList:Array<Projeto> = [];
   pessoaList: Array<Pessoa> = [];
+  pessoaList2: Array<Pessoa> = [];
 
   constructor(public httpClient: HttpClient,
               public dialogService: MatDialog,
@@ -49,9 +50,14 @@ export class ProjetoComponent implements OnInit {
       resultado => {
         this.pessoaList = resultado['content'];
         console.log(this.pessoaList);
+        for(let pessoa of this.pessoaList){
+          if( pessoa.funcionario ){
+            this.pessoaList2.push(pessoa);
+          }
+        }
 
         const dialogRef = this.dialogService.open(AddProjetoComponent, {
-          data: {projeto: {}, pessoaList: this.pessoaList}
+          data: {projeto: {}, pessoaList: this.pessoaList2}
         });
 
         dialogRef.afterClosed().subscribe(result => {

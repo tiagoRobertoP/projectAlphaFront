@@ -11,6 +11,7 @@ import { Membros } from './membros.model';
 import { PessoaService } from '../pessoa/pessoa.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DesvincularMembroComponent } from './desvincular-membro/desvincular-membro.component';
+import { VincularMembrosComponent } from './vincular-membros/vincular-membros.component';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class MembrosComponent implements OnInit {
   projetoList: Array<Projeto> = [];
   public membros:Array<Membros> = [];
   public addFormGroup: FormGroup;
+  projetoValue: number;
 
   constructor(public httpClient: HttpClient,
               public dialogService: MatDialog,
@@ -91,10 +93,37 @@ export class MembrosComponent implements OnInit {
     const dialogRef = this.dialogService.open(DesvincularMembroComponent, {
       data: {idPessoa: idPessoa, nome: nome, idProjeto: idProjeto}
     })
+    .afterClosed()
+    .subscribe(() => {
+      this.changePessoa(this.projetoValue);
+      this.selected.id = this.projetoValue;
+      this.selected = this.selected ;
+    });
+  }
+
+  vincular(i: number, idPessoa: number, nome: string, idProjeto: number) {
+    this.index = i;
+    this.id = idPessoa;
+    const dialogRef = this.dialogService.open(VincularMembrosComponent, {
+      data: {idPessoa: idPessoa, nome: nome, idProjeto: this.projetoValue}
+    });
     // .afterClosed()
-    // .subscribe((shouldReload: boolean) => {
-    //     if (shouldReload) window.location.reload()
+    // .subscribe(() => {
+    //     // this.membrosService.dataChange.value.push(this.dataService.getDialogData());
+    //     window.location.reload()
+    //     this.changePessoa(this.projetoValue);
+    //     // this.selected.id = this.projetoValue;
+    //     // this.selected = this.selected ;
     // });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.membrosService.dataChange.value.push(this.dataService.getDialogData());
+        this.changePessoa(this.projetoValue);
+        this.selected.id = this.projetoValue;
+        this.selected = this.selected ;
+      }
+    });
   }
 
 
@@ -110,16 +139,17 @@ export class MembrosComponent implements OnInit {
       });
   }
 
-  // nextPage(event: PageEvent) {
-  //   const request = {};
-  //   request['page'] = event.pageIndex.toString();
-  //   request['size'] = event.pageSize.toString();
-  //   this.loadData(request);
-  // }
+  nextPage(event: PageEvent) {
+    const request = {};
+    request['page'] = event.pageIndex.toString();
+    request['size'] = event.pageSize.toString();
+    this.loadData(request);
+  }
 
   changePessoa(value) {
+    this.projetoValue = value;
     this.pessoasList = [];
-    this.membrosService.getAllPessoas({ page: "0", size: "5" }).subscribe(resultado =>
+    this.membrosService.getAllPessoas({ page: "0", size: "1000" }).subscribe(resultado =>
       {
         this.pessoas = resultado['content'];
 
@@ -136,9 +166,11 @@ export class MembrosComponent implements OnInit {
                   pessoa.EhMembro = true;
                   pessoa.idProjeto = membro.membrosId.idprojeto;
                 }
-
               }
-              this.pessoasList.push(pessoa)
+
+              if(pessoa.funcionario) {
+                this.pessoasList.push(pessoa)
+              }
             }
             this.dataSource.data = this.pessoasList;
           });

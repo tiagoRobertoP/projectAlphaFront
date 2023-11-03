@@ -42,9 +42,9 @@ export class MembrosService {
     return this.httpClient.delete<Membros[]>(this.API_URL + '/membros', httpOptions);
   }
 
-  // addProjeto(projeto: Projeto): Observable<any> {
-  //   return this.httpClient.post(this.API_URL + '/projeto', projeto);
-  // }
+  vincular(membros: MembrosId): Observable<any> {
+    return this.httpClient.post(this.API_URL + '/membros', membros);
+  }
 
   // updateProjeto(projeto: Projeto): Observable<any> {
   //   return this.httpClient.put(this.API_URL + '/projeto/alterar/' + projeto.id , projeto);

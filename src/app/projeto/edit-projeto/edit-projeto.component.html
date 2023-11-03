@@ -3,7 +3,7 @@
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" [formGroup]="addFormGroup">
 
-    <div class="form">
+    <div class="form" >
       <mat-form-field color="accent">
         <textarea
           matInput
@@ -18,7 +18,6 @@
       </mat-form-field>
     </div>
 
-    <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
         <textarea
@@ -34,7 +33,6 @@
       </mat-form-field>
     </div>
 
-    <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
         <textarea
@@ -52,7 +50,6 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <!-- <mat-label>Gerente</mat-label> -->
         <mat-select  placeholder="Status" formControlName="status" >
           <mat-option  *ngFor="let status of Status" [value]="status.option" >
             {{status.option}}
@@ -74,7 +71,7 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput  placeholder="Orcamento" formControlName="orcamento" name="orcamento" required/>
+        <input type="number"s matInput  placeholder="Orcamento" formControlName="orcamento" name="orcamento" required/>
       </mat-form-field>
     </div>
 

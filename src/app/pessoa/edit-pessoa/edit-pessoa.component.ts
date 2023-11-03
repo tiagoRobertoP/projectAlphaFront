@@ -48,6 +48,8 @@ ngOnInit(): void {
   this.addFormGroup.patchValue({'datanascimento': this.data.datanascimento});
   this.addFormGroup.get('funcionario').updateValueAndValidity();
   this.addFormGroup.patchValue({'funcionario': String(this.data.funcionario)});
+
+  this.addFormGroup.controls['idPessoa'].disable();
 }
 
 onNoClick(): void {

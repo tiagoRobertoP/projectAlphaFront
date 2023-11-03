@@ -96,8 +96,7 @@ ngOnInit(): void {
   this.addFormGroup.patchValue({'gerente': this.data.gerente});
   this.addFormGroup.get('gerente').setValue(this.data.gerente.idPessoa);
 
-  console.log('data ' + this.data);
-  console.log('gerente ' + this.data.gerente.nome)
+  this.addFormGroup.controls['id'].disable();
 }
 
 onNoClick(): void {
