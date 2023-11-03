@@ -28,10 +28,8 @@ export class AddPessoaComponent implements OnInit {
     });
   }
 
-  formControl = new FormControl('', [
-  Validators.required
-  // Validators.email,
-  ]);
+  formControl = new FormControl('', [Validators.required]
+  );
 
   getErrorMessage() {
   return this.formControl.hasError('required') ? 'Required field' :

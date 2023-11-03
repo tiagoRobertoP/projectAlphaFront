@@ -77,7 +77,7 @@ import { VincularMembrosComponent } from './membros/vincular-membros/vincular-me
     MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
 
   ],
   providers: [],
