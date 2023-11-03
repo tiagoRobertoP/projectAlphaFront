@@ -35,6 +35,11 @@
       <mat-cell *matCellDef="let row"> {{row.nome}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="idProjeto" style="display: none;">
+      <mat-header-cell *matHeaderCellDef style="display: none;">idProjeto</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="display: none;"> {{row.idProjeto}}</mat-cell>
+    </ng-container>
+
 
     <!-- actions -->
     <ng-container matColumnDef="actions">
@@ -45,12 +50,12 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent"  *ngIf="!row.EhMembro" (click)="vincular(i, row.idPessoa)">
+        <button mat-icon-button color="accent"  *ngIf="!row.EhMembro" (click)="vincular(i, row.idPessoa, row.nome, row.idProjeto)">
           <!-- <mat-icon aria-label="Edit">edit</mat-icon> -->
           vincular
         </button>
 
-        <button type="button" mat-icon-button color="accent" *ngIf="row.EhMembro" (click)="desvincular(i, row.idPessoa)">
+        <button type="button" mat-icon-button color="accent" *ngIf="row.EhMembro" (click)="desvincular(i, row.idPessoa, row.nome, row.idProjeto)">
           <!-- <mat-icon aria-label="Delete">delete</mat-icon> -->
           desvincular
         </button>

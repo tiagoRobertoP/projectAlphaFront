@@ -10,6 +10,7 @@ import { MembrosService } from './membros.service';
 import { Membros } from './membros.model';
 import { PessoaService } from '../pessoa/pessoa.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DesvincularMembroComponent } from './desvincular-membro/desvincular-membro.component';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MembrosComponent implements OnInit {
 
-  displayedColumns = ['idPessoa', 'nome', 'actions'];
+  displayedColumns = ['idPessoa', 'nome', 'idProjeto', 'actions'];
   pessoaService2: PessoaService | null;
   dataSource = new MatTableDataSource();
   index: number;
@@ -84,17 +85,17 @@ export class MembrosComponent implements OnInit {
   //   });
   // }
 
-  // deleteItem(i: number, idPessoa: number, nome: string, cpf: string, datanascimento: string) {
-  //   this.index = i;
-  //   this.id = idPessoa;
-  //   const dialogRef = this.dialogService.open(DeletePessoaComponent, {
-  //     data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento}
-  //   })
-  //   .afterClosed()
-  //   .subscribe((shouldReload: boolean) => {
-  //       if (shouldReload) window.location.reload()
-  //   });
-  // }
+  desvincular(i: number, idPessoa: number, nome: string, idProjeto: number) {
+    this.index = i;
+    this.id = idPessoa;
+    const dialogRef = this.dialogService.open(DesvincularMembroComponent, {
+      data: {idPessoa: idPessoa, nome: nome, idProjeto: idProjeto}
+    })
+    // .afterClosed()
+    // .subscribe((shouldReload: boolean) => {
+    //     if (shouldReload) window.location.reload()
+    // });
+  }
 
 
   // private refreshTable() {
@@ -133,9 +134,11 @@ export class MembrosComponent implements OnInit {
               for ( let membro of this.membros){
                 if( membro.membrosId.pessoa.idPessoa === pessoa.idPessoa ){
                   pessoa.EhMembro = true;
-                  this.pessoasList.push(pessoa)
+                  pessoa.idProjeto = membro.membrosId.idprojeto;
                 }
+
               }
+              this.pessoasList.push(pessoa)
             }
             this.dataSource.data = this.pessoasList;
           });

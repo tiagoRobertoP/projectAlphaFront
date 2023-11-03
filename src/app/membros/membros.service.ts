@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Pessoa } from '../pessoa/pessoa.model';
 import { Membros } from './membros.model';
 import { Projeto } from '../projeto/projeto.model';
+import { MembrosId } from './membros-id.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +35,12 @@ export class MembrosService {
   // }
 
 
-  // deleteProjeto(id: number): Observable<Projeto[]> {
-  //   return this.httpClient.delete<Projeto[]>(this.API_URL + '/projeto/' +  id);
-  // }
+  desvincular(membrosId: MembrosId): Observable<Membros[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: membrosId
+    };
+    return this.httpClient.delete<Membros[]>(this.API_URL + '/membros', httpOptions);
+  }
 
   // addProjeto(projeto: Projeto): Observable<any> {
   //   return this.httpClient.post(this.API_URL + '/projeto', projeto);

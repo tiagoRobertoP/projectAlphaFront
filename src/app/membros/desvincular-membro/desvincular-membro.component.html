@@ -1,0 +1,15 @@
+<p>desvincular-membro works!</p>
+<div class="container">
+  <h3 mat-dialog-title>Deseja desvincular?</h3>
+  <div mat-dialog-content>
+    Id: {{data.id}}
+    <p></p>
+    Title: {{data.nome}}
+    <p></p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button type="button" mat-button [mat-dialog-close]="1" (click)="confirmDesvincular()">Desvincular</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>

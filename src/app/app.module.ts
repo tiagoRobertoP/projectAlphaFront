@@ -33,6 +33,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { EditProjetoComponent } from './projeto/edit-projeto/edit-projeto.component';
 import { DeleteProjetoComponent } from './projeto/delete-projeto/delete-projeto.component';
 import { MembrosComponent } from './membros/membros.component';
+import { DesvincularMembroComponent } from './membros/desvincular-membro/desvincular-membro.component';
 
 
 
@@ -50,7 +51,8 @@ import { MembrosComponent } from './membros/membros.component';
     AddProjetoComponent,
     EditProjetoComponent,
     DeleteProjetoComponent,
-    MembrosComponent
+    MembrosComponent,
+    DesvincularMembroComponent
   ],
   imports: [
     BrowserModule,

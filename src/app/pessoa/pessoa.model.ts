@@ -7,4 +7,5 @@ export class Pessoa {
   funcionario: Boolean;
 
   EhMembro: Boolean;
+  idProjeto: number;
 }
