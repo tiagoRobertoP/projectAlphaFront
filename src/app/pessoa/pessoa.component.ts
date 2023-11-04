@@ -74,8 +74,8 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
       data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento, funcionario: funcionario}
     })
     .afterClosed()
-    .subscribe((shouldReload: boolean) => {
-        if (shouldReload) window.location.reload()
+    .subscribe(() => {
+        this.refreshTable();
     });
   }
 
@@ -95,7 +95,7 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
       result => {
         if (this.pessoaService.resultFromDelete === 1) {
         // window.location.reload()
-        // this.refreshTable();
+        this.refreshTable();
         console.log(result);
         }
       });

@@ -103,17 +103,9 @@ export class ProjetoComponent implements OnInit {
     // });
     dialogRef.afterClosed().subscribe(
       result => {
-        if (this.projetoService.resultFromDelete === 1) {
-        // window.location.reload()
-        this.refreshTable();
-        console.log(result);
-        }else{
-          console.log("erroo");
-          // alert("confira gerentes e Membros!");
-          // this.openModal();
           this.refreshTable();
+          window.location.reload()
         }
-      }
     );
   }
 

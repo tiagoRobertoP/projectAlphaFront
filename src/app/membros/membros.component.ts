@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,6 +46,7 @@ export class MembrosComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('filter',  {static: true}) filter: ElementRef;
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
 
   ngOnInit(): void {
     this.loadData({ page: "0", size: "1000" });
@@ -92,12 +93,24 @@ export class MembrosComponent implements OnInit {
     this.id = idPessoa;
     const dialogRef = this.dialogService.open(DesvincularMembroComponent, {
       data: {idPessoa: idPessoa, nome: nome, idProjeto: idProjeto}
-    })
-    .afterClosed()
-    .subscribe(() => {
-      this.changePessoa(this.projetoValue);
-      this.selected.id = this.projetoValue;
-      this.selected = this.selected ;
+    });
+    // .afterClosed()
+    // .subscribe(result => {
+    //   this.changeDetectorRefs.detectChanges();
+    //   this.changePessoa(this.projetoValue);
+    //   this.changeDetectorRefs.detectChanges();
+    //   // this.selected.id = this.projetoValue;
+    //   // this.selected = this.selected ;
+    // });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // if (result) {
+        this.membrosService.dataChange.value.push(this.dataService.getDialogData());
+        this.changePessoa(this.projetoValue);
+        this.table.renderRows()
+        // this.selected.id = this.projetoValue;
+        // this.selected = this.selected ;
+      // }
     });
   }
 
@@ -117,12 +130,13 @@ export class MembrosComponent implements OnInit {
     // });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // this.membrosService.dataChange.value.push(this.dataService.getDialogData());
+      // if (result) {
+        this.membrosService.dataChange.value.push(this.dataService.getDialogData());
         this.changePessoa(this.projetoValue);
-        this.selected.id = this.projetoValue;
-        this.selected = this.selected ;
-      }
+        this.table.renderRows()
+        // this.selected.id = this.projetoValue;
+        // this.selected = this.selected ;
+      // }
     });
   }
 
@@ -149,15 +163,14 @@ export class MembrosComponent implements OnInit {
   changePessoa(value) {
     this.projetoValue = value;
     this.pessoasList = [];
-    this.membrosService.getAllPessoas({ page: "0", size: "10" }).subscribe(resultado =>
+    this.membrosService.getAllPessoas({ page: "0", size: "1000" }).subscribe(resultado =>
       {
         this.pessoas = resultado['content'];
         console.log (resultado)
 
         this.totalElements = resultado['totalElements']
-        // this.dataSource.data = this.pessoasList
 
-        this.membrosService.getAllMembrosByProjeto({ page: "0", size: "10" }, value).subscribe(resultado =>
+        this.membrosService.getAllMembrosByProjeto({ page: "0", size: "1000" }, value).subscribe(resultado =>
           {
             this.membros = resultado;
 
@@ -173,7 +186,8 @@ export class MembrosComponent implements OnInit {
                 this.pessoasList.push(pessoa)
               }
             }
-            this.dataSource.data = this.pessoasList;
+            this.dataSource= new MatTableDataSource(this.pessoasList);
+            this.dataSource.paginator = this.paginator;
             this.totalElements = this.pessoasList.length
             console.log(this.dataSource);
           });

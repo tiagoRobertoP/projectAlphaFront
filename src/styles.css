@@ -13,6 +13,7 @@ main {
     margin-bottom: 20px;
     margin-left: 46px!important;
     margin-top: 80px!important;
+    width: 95%!important;
 }
 
 @media screen and (max-width: 600px) {
