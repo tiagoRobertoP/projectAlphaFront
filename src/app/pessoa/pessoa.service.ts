@@ -3,6 +3,10 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Pessoa } from './pessoa.model';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
+import { Component, OnInit } from '@angular/core';
+import { ProjectsModalComponent } from './projects-modal/projects-modal.component';
 
 
 
@@ -16,10 +20,15 @@ export class PessoaService {
 
   private readonly API_URL = 'http://localhost:8080/api';
 
+
   dataChange: BehaviorSubject<Pessoa[]> = new BehaviorSubject<Pessoa[]>([]);
   dialogData: any;
+  dialogConfig = new MatDialogConfig();
+  modalDialog: MatDialogRef<ProjectsModalComponent, any> | undefined;
+  resultFromDelete:number;
 
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient, public matDialog: MatDialog) {}
 
   get data(): Pessoa[] {
     return this.dataChange.value;
@@ -46,9 +55,31 @@ export class PessoaService {
   //   this.dialogData = issue;
   // }
 
-  deletePessoa(id: number): Observable<Pessoa[]> {
-    return this.httpClient.delete<Pessoa[]>(this.API_URL + '/pessoa/' +  id);
+  deletePessoa(id: number) {
+    return this.httpClient.delete<Pessoa[]>(this.API_URL + '/pessoa/' +  id).subscribe(
+      data => console.log('success', data),
+      error => {
+        console.log('error', error)
+        this.openModal();
+      });
   }
+
+  openModal() {
+    this.dialogConfig.id = "projects-modal-component";
+    this.dialogConfig.height = "250px";
+    this.dialogConfig.width = "500px";
+    this.modalDialog = this.matDialog.open(ProjectsModalComponent, this.dialogConfig);
+  }
+
+//   private handleError(error: Response): Promise<Response>{
+//     // console.error('An error occurred', error);
+//     // alert(error.json());
+
+//    this.resultFromDelete= 0;
+//     return Promise.reject(0);
+//  }
+
+
 
   // ADD, POST METHOD
   addPessoa(pessoa: Pessoa): Observable<any> {
@@ -90,4 +121,8 @@ export class PessoaService {
   //     }
   //   );
   // }
+
+
+
+
 

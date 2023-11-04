@@ -149,14 +149,15 @@ export class MembrosComponent implements OnInit {
   changePessoa(value) {
     this.projetoValue = value;
     this.pessoasList = [];
-    this.membrosService.getAllPessoas({ page: "0", size: "1000" }).subscribe(resultado =>
+    this.membrosService.getAllPessoas({ page: "0", size: "10" }).subscribe(resultado =>
       {
         this.pessoas = resultado['content'];
+        console.log (resultado)
 
         this.totalElements = resultado['totalElements']
         // this.dataSource.data = this.pessoasList
 
-        this.membrosService.getAllMembrosByProjeto({ page: "0", size: "1000" }, value).subscribe(resultado =>
+        this.membrosService.getAllMembrosByProjeto({ page: "0", size: "10" }, value).subscribe(resultado =>
           {
             this.membros = resultado;
 
@@ -168,11 +169,13 @@ export class MembrosComponent implements OnInit {
                 }
               }
 
-              if(pessoa.funcionario) {
+              if(pessoa.funcionario ) {
                 this.pessoasList.push(pessoa)
               }
             }
             this.dataSource.data = this.pessoasList;
+            this.totalElements = this.pessoasList.length
+            console.log(this.dataSource);
           });
 
 

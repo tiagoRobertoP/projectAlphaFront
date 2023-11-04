@@ -4,12 +4,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Projeto } from './projeto.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AddProjetoComponent } from './add-projeto/add-projeto.component';
 import { Pessoa } from '../pessoa/pessoa.model';
 import { EditProjetoComponent } from './edit-projeto/edit-projeto.component';
 import { DeleteProjetoComponent } from './delete-projeto/delete-projeto.component';
+import { ProjectsModalComponent } from '../pessoa/projects-modal/projects-modal.component';
 
 @Component({
   selector: 'app-projeto',
@@ -28,13 +29,16 @@ export class ProjetoComponent implements OnInit {
   public projetosList:Array<Projeto> = [];
   pessoaList: Array<Pessoa> = [];
   pessoaList2: Array<Pessoa> = [];
+  dialogConfig = new MatDialogConfig();
+  modalDialog: MatDialogRef<ProjectsModalComponent, any> | undefined;
 
   constructor(public httpClient: HttpClient,
               public dialogService: MatDialog,
               public dataService: ProjetoService,
               public router: Router,
               public projetoService: ProjetoService,
-              private changeDetectorRefs: ChangeDetectorRef) {}
+              private changeDetectorRefs: ChangeDetectorRef,
+              public matDialog: MatDialog) {}
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('filter',  {static: true}) filter: ElementRef;
@@ -92,10 +96,32 @@ export class ProjetoComponent implements OnInit {
     this.id = id;
     const dialogRef = this.dialogService.open(DeleteProjetoComponent, {
       data: {id: id, nome: nome}
-    }).afterClosed()
-    .subscribe((shouldReload: boolean) => {
-        if (shouldReload) window.location.reload();
     });
+    // .afterClosed()
+    // .subscribe((shouldReload: boolean) => {
+    //     if (shouldReload) window.location.reload();
+    // });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (this.projetoService.resultFromDelete === 1) {
+        // window.location.reload()
+        this.refreshTable();
+        console.log(result);
+        }else{
+          console.log("erroo");
+          // alert("confira gerentes e Membros!");
+          // this.openModal();
+          this.refreshTable();
+        }
+      }
+    );
+  }
+
+  openModal() {
+    this.dialogConfig.id = "projects-modal-component";
+    this.dialogConfig.height = "250px";
+    this.dialogConfig.width = "500px";
+    this.modalDialog = this.matDialog.open(ProjectsModalComponent, this.dialogConfig);
   }
 
   private refreshTable() {

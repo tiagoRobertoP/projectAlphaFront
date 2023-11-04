@@ -17,6 +17,6 @@ export class DeleteProjetoComponent  {
   }
 
   confirmDelete(): void {
-  this.projetoService.deleteProjeto(this.data.id).subscribe(resultado => this.data = resultado);
+  this.projetoService.deleteProjeto(this.data.id);
   }
 }

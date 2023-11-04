@@ -35,6 +35,7 @@ import { DeleteProjetoComponent } from './projeto/delete-projeto/delete-projeto.
 import { MembrosComponent } from './membros/membros.component';
 import { DesvincularMembroComponent } from './membros/desvincular-membro/desvincular-membro.component';
 import { VincularMembrosComponent } from './membros/vincular-membros/vincular-membros.component';
+import { ProjectsModalComponent } from './pessoa/projects-modal/projects-modal.component';
 
 
 
@@ -54,7 +55,8 @@ import { VincularMembrosComponent } from './membros/vincular-membros/vincular-me
     DeleteProjetoComponent,
     MembrosComponent,
     DesvincularMembroComponent,
-    VincularMembrosComponent
+    VincularMembrosComponent,
+    ProjectsModalComponent
   ],
   imports: [
     BrowserModule,

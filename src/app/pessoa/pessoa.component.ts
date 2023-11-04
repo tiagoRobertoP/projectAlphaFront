@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
-import {HttpClient} from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import {BehaviorSubject, fromEvent, merge, Observable} from 'rxjs';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { AddPessoaComponent } from './add-pessoa/add-pessoa.component';
 import { DeletePessoaComponent } from './delete-pessoa/delete-pessoa.component';
 import { EditPessoaComponent } from './edit-pessoa/edit-pessoa.component';
+import { ProjectsModalComponent } from './projects-modal/projects-modal.component';
 
 
 @Component({
@@ -32,13 +33,16 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
   totalElements: number = 0;
   public pessoas:Array<Pessoa> = [];
   public pessoasList:Array<Pessoa> = [];
+  dialogConfig = new MatDialogConfig();
+  modalDialog: MatDialogRef<ProjectsModalComponent, any> | undefined;
 
   constructor(public httpClient: HttpClient,
               public dialogService: MatDialog,
               public dataService: PessoaService,
               public router: Router,
               public pessoaService: PessoaService,
-              private changeDetectorRefs: ChangeDetectorRef) {}
+              private changeDetectorRefs: ChangeDetectorRef,
+              public matDialog: MatDialog) {}
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('filter',  {static: true}) filter: ElementRef;
@@ -81,10 +85,27 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
     const dialogRef = this.dialogService.open(DeletePessoaComponent, {
       data: {idPessoa: idPessoa, nome: nome, cpf: cpf, datanascimento: datanascimento}
     })
-    .afterClosed()
-    .subscribe((shouldReload: boolean) => {
-        if (shouldReload) window.location.reload()
-    });
+    ;
+    // .afterClosed()
+    // .subscribe((shouldReload: boolean) => {
+    //     if (shouldReload) window.location.reload()
+    // });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (this.pessoaService.resultFromDelete === 1) {
+        // window.location.reload()
+        // this.refreshTable();
+        console.log(result);
+        }
+      });
+  }
+
+  openModal() {
+    this.dialogConfig.id = "projects-modal-component";
+    this.dialogConfig.height = "250px";
+    this.dialogConfig.width = "500px";
+    this.modalDialog = this.matDialog.open(ProjectsModalComponent, this.dialogConfig);
   }
 
 
@@ -120,3 +141,7 @@ export class PessoaComponent implements OnInit, AfterViewInit  {
   }
 
 }
+
+
+
+

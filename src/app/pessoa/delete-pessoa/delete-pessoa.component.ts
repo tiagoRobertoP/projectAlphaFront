@@ -17,6 +17,6 @@ export class DeletePessoaComponent   {
   }
 
   confirmDelete(): void {
-  this.pessoaService.deletePessoa(this.data.idPessoa).subscribe(resultado => this.data = resultado);
+  this.pessoaService.deletePessoa(this.data.idPessoa);
   }
 }
